@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="投稿指南 — ThinkSpirit Launchpad">
+<main id="main" class="wrap guide detail"><a class="back-link" href="/">← 返回展厅</a><header class="detail-header"><div class="eyebrow">YOUR FIRST PULL REQUEST</div><h1>给想法，<br /><span>一个地址。</span></h1><p>不需要先做完项目。准备一个文件夹、一份草稿，就可以加入展厅。</p></header>
+<div class="guide-steps"><span>01 复制仓库</span><span>02 创建空间</span><span>03 写下想法</span><span>04 提交 PR</span></div>
+<article class="prose guide-prose"><h2>你会得到什么？</h2><p>一个独立地址 <code>/spaces/你的文件夹名/</code>，一个自动出现在首页的项目小窗。你的文字、图片都保存在同一个文件夹里。只需要写 Markdown，不用修改首页代码。</p><h2>01 / 把仓库拿到本地</h2><p>先安装 Node.js 24 LTS 和 Git。打开项目的 GitHub 仓库，点击 <strong>Fork</strong>，复制你自己 Fork 的地址。将下面的地址换成你的真实地址：</p><pre><code>git clone &lt;你的-Fork-仓库地址&gt;
+cd thinkspirit-launchpad
+npm ci
+git switch -c feat/my-space</code></pre><p>如果你有仓库写权限，也可以直接从原仓库创建分支，无需 Fork。</p><h2>02 / 领取一个文件夹</h2><p>用英文小写、数字和连字符命名，例如 <code>lin-study-kit</code>。不要使用空格或中文。一个人先维护一个空间，项目名可以随时改。</p><pre><code>npm run new -- lin-study-kit</code></pre><p>脚本会创建以下文件。也可以手动复制 <code>templates/space/</code> 到相同位置：</p><pre><code>src/content/spaces/lin-study-kit/
+├── index.md       # 卡片信息 + proposal 正文
+└── sketch.svg     # 示例封面，可以换成自己的图片</code></pre><h2>03 / 写下你的想法</h2><p>打开 <code>index.md</code>。文件顶部两条 <code>---</code> 之间叫做 frontmatter，用来描述首页卡片：</p><pre><code>---
+title: "我的项目"
+author: "你的名字"
+tagline: "一句话：帮谁解决什么问题？"
+stage: idea
+tags: [Node.js, TypeScript]
+accent: lime
+updated: "2026-09-30"
+example: false
+cover: ./sketch.svg
+---</code></pre><ul><li><code>stage</code>：<code>idea</code> 灵感、<code>draft</code> 草稿、<code>building</code> 开发中、<code>shipped</code> 已上线。</li><li><code>accent</code>：<code>lime</code>、<code>blue</code> 或 <code>coral</code>，控制空间的强调色。</li><li><code>updated</code>：本次更新日期，用引号包住，格式为 YYYY-MM-DD。</li><li><code>cover</code>：相对于这个文件的封面路径。可删除此行，使用自动生成的封面。</li><li><code>repo</code> / <code>demo</code>：可选的 HTTPS 仓库和演示链接。没有就不写，不要用假地址占位。</li></ul><p>正文写：目标用户、问题、首版范围、前后端怎么配合、数据模型、草图和下一步。暂时没有答案可以标注「待讨论」。<a href="/spaces/pocket-tasks/">看看完整的示例 →</a></p><h3>放入自己的图片</h3><p>将 <code>wireframe.png</code> 放到你的文件夹，正文用 <code>![首页草图](./wireframe.png)</code> 引用。封面可以写 <code>cover: ./wireframe.png</code>。尽量压缩图片，避免提交大视频或设计源文件。</p><h2>04 / 预览、检查、提交</h2><pre><code>npm run dev
+# 在浏览器打开终端显示的本地地址
+# 检查首页卡片和 /spaces/你的文件夹名/
+
+npm test
+npm run build
+
+git add src/content/spaces/lin-study-kit
+git commit -m "feat: add lin study kit proposal"
+git push -u origin feat/my-space</code></pre><p>在 GitHub 打开你的 Fork，点击 <strong>Compare &amp; pull request</strong>，目标选择原仓库的主分支。标题写清项目名，描述里说明想做什么、想得到什么反馈。合并后，配置好的 Cloudflare Pages 会自动更新展厅。</p><h2>一个好 PR 的检查清单</h2><ul><li>主要只修改自己的空间文件夹。</li><li>标题、作者、一句话介绍都已填写，保留 <code>example: false</code>。</li><li>首页和详情页都预览过，图片能够打开。</li><li><code>npm test</code> 和 <code>npm run build</code> 通过。</li><li>没有 API Key、密码、手机号等私密信息。这个站点是公开的。</li><li>标注了尚未实现的功能，没有把想法写成已上线成果。</li></ul><h2>接下来怎么更新？</h2><p>在自己的文件夹里更新正文、阶段和日期，再提一个 PR。做出能运行的版本后补上仓库和 Demo 链接。你的 Node 全栈应用放在自己的项目仓库，这里负责展示和交流。</p><blockquote>先把范围缩小到：一个用户，解决一个问题，跑通一条前端 → API → 数据库的路径。</blockquote></article>
+</main>
+</Base>

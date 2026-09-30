@@ -1,0 +1,19 @@
+---
+import '../styles/global.css';
+interface Props { title?: string; description?: string; }
+const { title = 'ThinkSpirit Launchpad — 从想法到第一个作品', description = 'ThinkSpirit 新人的 full-stack 项目展厅。分享想法、交换反馈，一起把第一件作品做出来。' } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} /><meta name="theme-color" content="#111716" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" /><title>{title}</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到内容</a>
+    <header class="nav wrap"><a class="brand" href="/" aria-label="ThinkSpirit Launchpad 首页"><span class="brand-mark">✳</span> ThinkSpirit<span class="brand-sub">/ LAUNCHPAD</span></a><nav aria-label="主导航"><a href="/#spaces">项目展厅</a><a href="/guide/" class="nav-guide">投稿指南 <span aria-hidden="true">↗</span></a></nav></header>
+    <slot />
+    <footer class="wrap footer"><a class="brand" href="/">✳ ThinkSpirit</a><span>Small beginnings. Real possibilities.</span><a href="/guide/">从你的第一个 PR 开始 ↗</a></footer>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const spaces = (await getCollection('spaces')).sort((a,b) => Number(a.data.example)-Number(b.data.example) || b.data.updated.localeCompare(a.data.updated) || a.id.localeCompare(b.id));
+const stages = { idea: '灵感', draft: '草稿', building: '开发中', shipped: '已上线' };
+const real = spaces.filter(s => !s.data.example).length;
+---
+<Base>
+<main id="main">
+<section class="hero wrap">
+  <div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> THINKSPIRIT · STARTING UP PROJECT EXPO</div><h1>想法，<br />准备<span class="outline">起飞。</span><span class="hero-star" aria-hidden="true">✳</span></h1><p class="hero-desc">一个人，一个想法，一个属于你的 full-stack 项目。<br />在这里晒出草稿，收集反馈，把「我想做」变成「我做了」。</p><div class="hero-actions"><a class="button primary" href="#spaces">探索项目 <span>↓</span></a><a class="button subtle" href="/guide/">创建我的空间 ↗</a></div><div class="hero-note"><span>NODE.JS</span><span>YOUR FIRST FULL-STACK BUILD</span><span>OPEN TO IDEAS</span></div></div>
+  <div class="hero-art" aria-label="从想法、草稿到构建的项目起飞示意图" role="img"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="orbital-label label-one">01 / IMAGINE</span><span class="orbital-label label-two">02 / MAKE</span><div class="art-star">✳</div><div class="floating-window"><div class="window-top"><span class="window-dots"><i></i><i></i><i></i></span><span>your-first-project.ts</span><span>↗</span></div><div class="window-content"><span class="code-muted">// big things start small</span><br /><span class="code-purple">const</span> idea = <span class="code-lime">"what if…"</span>;<br /><span class="code-purple">await</span> you.<span class="code-lime">build</span>(idea);<div class="terminal-line"><span>›</span> ready to make it real<span class="cursor"></span></div></div></div><span class="art-caption">A LITTLE IDEA.<br />A WORLD OF POSSIBILITIES.</span><span class="coordinate">TS / 001</span></div>
+</section>
+<div class="ticker" aria-hidden="true"><div>IDEA → PROPOSAL → PULL REQUEST → BUILD → SHOWCASE <span>✳</span> IDEA → PROPOSAL → PULL REQUEST → BUILD → SHOWCASE <span>✳</span></div></div>
+<section class="wrap gallery" id="spaces"><div class="section-top"><div><div class="eyebrow">THE PROJECT NEIGHBOURHOOD</div><h2>每个小窗，<span>一个新世界。</span></h2></div><span class="gallery-count">{String(real).padStart(2,'0')} 个成员项目 · {spaces.length-real} 个教学示例</span></div>
+<div class="filters" role="group" aria-label="按阶段筛选项目"><button class="filter active" data-filter="all" aria-pressed="true">全部空间 <span>{spaces.length}</span></button>{Object.entries(stages).map(([value,label]) => <button class="filter" data-filter={value} aria-pressed="false">{label}</button>)}<span class="filter-hint">想法还不完整？也欢迎。</span></div>
+<p class="filter-empty" hidden>这个阶段还没有项目。你的项目可以是第一个。</p><div class="space-grid">{spaces.map(space => <a class:list={['space-card',space.data.accent]} href={`/spaces/${space.id}/`} data-stage={space.data.stage}><div class="card-chrome"><span class="window-dots"><i></i><i></i><i></i></span><span>{space.id} / workspace</span><span>↗</span></div><div class="card-visual">{space.data.cover ? <img src={space.data.cover.src} width={space.data.cover.width} height={space.data.cover.height} alt={`${space.data.title} 项目草图`} loading="lazy" /> : <span class="fallback-art">{space.data.title.slice(0,1)}<span>✳</span></span>}<span class="stage-badge">{stages[space.data.stage]}</span></div><div class="card-body"><div class="card-author">{space.data.example ? '教学示例 · 虚构项目' : space.data.author}<span>OPEN SPACE ↗</span></div><h3>{space.data.title}</h3><p>{space.data.tagline}</p><div class="tags">{space.data.tags.map(tag => <span>{tag}</span>)}</div></div></a>)}<a href="/guide/" class="join-card"><span class="join-plus">+</span><h3>下一个窗口，留给你。</h3><p>复制模板，写下想法。<br />你的第一个 PR，就是出发点。</p><span class="join-link">领取你的空间 ↗</span></a></div>
+</section>
+<section class="wrap bottom-callout"><span class="eyebrow">NO PERFECT IDEAS REQUIRED</span><h2>不用准备完美。<br />准备<span>开始。</span></h2><a class="button primary" href="/guide/">看看怎么投稿 ↗</a><span class="callout-star" aria-hidden="true">✳</span></section>
+</main>
+<script>
+const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+const cards = document.querySelectorAll<HTMLElement>('[data-stage]');
+buttons.forEach(button => button.addEventListener('click', () => {
+  buttons.forEach(b => { b.classList.toggle('active', b === button); b.setAttribute('aria-pressed', String(b === button)); });
+  let count = 0;
+  cards.forEach(card => { card.hidden = button.dataset.filter !== 'all' && card.dataset.stage !== button.dataset.filter; if (!card.hidden) count++; });
+  const empty = document.querySelector<HTMLElement>('.filter-empty');
+  if (empty) empty.hidden = count > 0;
+}));
+</script>
+</Base>
