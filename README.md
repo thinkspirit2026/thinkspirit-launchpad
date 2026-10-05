@@ -1,6 +1,6 @@
 # ThinkSpirit Launchpad ✳
 
-ThinkSpirit 新人的 Starting Up Project Expo。展示 Node full-stack 个人项目的想法、草稿与进度。纯静态站点，无数据库、登录或运行时服务器。
+ThinkSpirit 新人的 Starting Up Project Expo。展示 Node full-stack 个人项目的想法、草稿与进度。纯静态站点，无自建数据库、账号系统或运行时服务器。项目评论通过 Giscus 使用 GitHub 登录。
 
 - Astro 7 + TypeScript，构建时生成独立页面。
 - 每人一个 `src/content/spaces/<name>/` 文件夹，Markdown 和图片放在一起。
@@ -57,7 +57,15 @@ npm run preview
 - 构建环境设置 `NODE_VERSION=24`。
 - 如有需要，在 Pages 中启用非生产分支/PR 的 Preview deployments；以 Cloudflare 对仓库权限和 Fork 的实际支持为准。
 
-没有配置 GitHub Actions，避免额外消耗 CI 额度。构建失败会阻止新产物发布；Pages 尚未在本项目中配置或验证。
+没有配置 GitHub Actions，避免额外消耗 CI 额度。构建失败会阻止新产物发布。Pages 已连接仓库，主分支推送自动部署。
+
+## 项目评论
+
+每个项目详情页底部嵌入 Giscus，使用 GitHub 登录评论。评论保存在本仓库 Discussions 的 `Announcements` 分类，按 `pathname` 严格匹配，各项目独立讨论。更换站点域名不会改变映射；更改项目文件夹名会改变评论关联路径。
+
+配置位于 `src/components/Comments.astro`，仓库 ID 和分类 ID 是公开标识，不是密钥。不需要 Cloudflare 环境变量或额外 npm 依赖。维护者需要保持 Discussions 开启，并让 Giscus GitHub App 对本仓库有访问权限。
+
+评论 iframe 懒加载，使用中文和深色主题。浏览器需能访问 `giscus.app` 与 GitHub；加载受阻时可通过页面链接前往 Discussions。阅读项目正文不依赖评论服务。评论公开可见，请勿发布个人隐私；维护者可在 GitHub 中管理评论。
 
 ## 维护与安全
 

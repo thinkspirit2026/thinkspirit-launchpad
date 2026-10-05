@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Comments from '../../components/Comments.astro';
 import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() { return (await getCollection('spaces')).map(space => ({ params: { id: space.id }, props: { space } })); }
 const { space } = Astro.props;
@@ -9,6 +10,6 @@ const stages = { idea: '灵感', draft: '草稿', building: '开发中', shipped
 <Base title={`${space.data.title} — ThinkSpirit Launchpad`} description={space.data.tagline}>
 <main id="main" class:list={['wrap','detail',space.data.accent]}><a class="back-link" href="/#spaces">← 返回项目展厅</a><header class="detail-header"><div class="eyebrow">{space.id} / PERSONAL WORKSPACE {space.data.example && '· 教学示例'}</div><h1>{space.data.title}</h1><p>{space.data.tagline}</p><div class="detail-meta"><span>BY {space.data.author}</span><span class="pill">{stages[space.data.stage]}</span><span>更新于 {space.data.updated}</span></div><div class="tags">{space.data.tags.map(tag => <span>{tag}</span>)}</div>{(space.data.repo || space.data.demo) && <div class="hero-actions">{space.data.repo && <a class="button subtle" href={space.data.repo} target="_blank" rel="noopener noreferrer">项目仓库 ↗</a>}{space.data.demo && <a class="button primary" href={space.data.demo} target="_blank" rel="noopener noreferrer">打开 Demo ↗</a>}</div>}</header>
 {space.data.example && <aside class="example-notice">这是用于演示投稿格式的虚构项目，不代表真实成员或已实现的产品。你可以参考结构，内容由自己决定。</aside>}
-<div class="detail-grid"><article class="prose"><Content /></article><aside class="toc"><span class="eyebrow">IN THIS SPACE</span><nav aria-label="本文目录">{headings.filter(h => h.depth === 2).map(h => <a href={`#${h.slug}`}>{h.text}</a>)}</nav><div class="sidebar-note">一个想法可以很小。<br />先做完一条能跑通的路径。</div><a class="back-link" href="/guide/">我也想投稿 ↗</a></aside></div>
+<div class="detail-grid"><div><article class="prose"><Content /></article><Comments /></div><aside class="toc"><span class="eyebrow">IN THIS SPACE</span><nav aria-label="本文目录">{headings.filter(h => h.depth === 2).map(h => <a href={`#${h.slug}`}>{h.text}</a>)}</nav><div class="sidebar-note">一个想法可以很小。<br />先做完一条能跑通的路径。</div><a class="back-link" href="/guide/">我也想投稿 ↗</a></aside></div>
 </main>
 </Base>
