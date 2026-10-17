@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620">
+  <rect width="1000" height="620" fill="#182333"/>
+  <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#94b8ff" stroke-opacity=".07"/></pattern>
+  <rect width="1000" height="620" fill="url(#grid)"/>
+  <rect x="60" y="45" width="880" height="530" rx="14" fill="#111b29" stroke="#4f6a92"/>
+  <path d="M60 98H940" stroke="#4f6a92"/>
+  <circle cx="85" cy="72" r="5" fill="#94b8ff"/>
+  <text x="104" y="77" fill="#b6c9e8" font-size="13" font-family="monospace">STUDY SPRINT / WORKSPACE</text>
+  <text x="95" y="148" fill="#eef3fc" font-size="26" font-family="sans-serif">Small sessions. Steady progress.</text>
+  <text x="95" y="177" fill="#90a5c3" font-size="12" font-family="monospace">PROPOSAL WIREFRAME / SAMPLE DATA</text>
+  <rect x="95" y="202" width="388" height="84" rx="8" fill="#223652"/>
+  <text x="115" y="229" fill="#a7bcdc" font-size="11" font-family="monospace">LAST 7 DAYS / MINUTES</text>
+  <text x="115" y="268" fill="#94b8ff" font-size="32" font-family="sans-serif">125</text>
+  <rect x="503" y="202" width="402" height="84" rx="8" fill="#223652"/>
+  <text x="523" y="229" fill="#a7bcdc" font-size="11" font-family="monospace">STUDY SESSIONS</text>
+  <text x="523" y="268" fill="#94b8ff" font-size="32" font-family="sans-serif">4</text>
+  <text x="95" y="325" fill="#edf3ff" font-size="15" font-family="sans-serif">Log a session</text>
+  <rect x="95" y="342" width="350" height="40" rx="5" fill="#1a2b42" stroke="#476184"/>
+  <text x="109" y="368" fill="#b4c7e2" font-size="13" font-family="sans-serif">Topic: Node routing</text>
+  <rect x="95" y="394" width="350" height="40" rx="5" fill="#1a2b42" stroke="#476184"/>
+  <text x="109" y="420" fill="#b4c7e2" font-size="13" font-family="sans-serif">Minutes: 25</text>
+  <rect x="95" y="446" width="350" height="40" rx="5" fill="#1a2b42" stroke="#476184"/>
+  <text x="109" y="472" fill="#839dbf" font-size="13" font-family="sans-serif">One thing I learned...</text>
+  <rect x="95" y="503" width="350" height="37" rx="5" fill="#94b8ff"/>
+  <text x="216" y="527" fill="#142033" font-size="13" font-family="sans-serif">Save session</text>
+  <text x="503" y="325" fill="#edf3ff" font-size="15" font-family="sans-serif">Recent sessions</text>
+  <rect x="503" y="342" width="402" height="72" rx="5" fill="#1a2b42"/>
+  <text x="520" y="369" fill="#dae7fa" font-size="14" font-family="sans-serif">Node routing</text>
+  <text x="520" y="394" fill="#90a5c3" font-size="11" font-family="monospace">TODAY / 25 MIN</text>
+  <rect x="503" y="428" width="402" height="72" rx="5" fill="#1a2b42"/>
+  <text x="520" y="455" fill="#dae7fa" font-size="14" font-family="sans-serif">My first SQL query</text>
+  <text x="520" y="480" fill="#90a5c3" font-size="11" font-family="monospace">YESTERDAY / 40 MIN</text>
+</svg>
